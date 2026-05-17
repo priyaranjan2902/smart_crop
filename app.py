@@ -31,7 +31,7 @@ plant_names = sorted(list(set([c.split("___")[0] for c in classes])))
 def load_classifier():
     model = models.resnet50()
     model.fc = nn.Linear(model.fc.in_features, len(classes))
-    model.load_state_dict(torch.load("model.pth", map_location=DEVICE))
+    model.load_state_dict(torch.load("models/model.pth", map_location=DEVICE))
     model = model.to(DEVICE)
     model.eval()
     return model
@@ -635,6 +635,11 @@ with col1:
         plant_names,
         key="plant_selector"
     )
+
+    # Fix for Android WebView APK — forces re-render after selection
+    if st.session_state.get("_last_plant") != selected_plant:
+        st.session_state["_last_plant"] = selected_plant
+        st.rerun()
 
     uploaded_file = st.file_uploader(
         "📤 Upload Leaf Image",
