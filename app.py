@@ -21,7 +21,7 @@ st.set_page_config(
 # 🔹 CONFIG
 # =============================
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-os.environ['GROQ_API_KEY'] = "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"
+os.environ['GROQ_API_KEY'] = st.secrets["GROQ_API_KEY"]
 
 # =============================
 # 🔹 LOAD CLASSES
