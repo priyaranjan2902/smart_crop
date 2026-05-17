@@ -520,7 +520,47 @@ div[data-testid="stButton"].landing-btn > button:hover {
     background: linear-gradient(90deg, #7c3aed, #fbbf24);
 }
 
-/* ── SELECTBOX & FILE UPLOADER ── */
+/* ── RADIO BUTTONS ── */
+.stRadio > label {
+    color: #4f46e5 !important;
+    font-family: 'DM Mono', monospace !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+}
+
+.stRadio > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+}
+
+.stRadio > div > label {
+    background: #faf9ff;
+    border: 1px solid #ede9fe;
+    border-radius: 8px;
+    padding: 0.55rem 1rem !important;
+    font-family: 'DM Mono', monospace !important;
+    font-size: 0.82rem !important;
+    color: #1e1b4b !important;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.stRadio > div > label:hover {
+    background: #ede9fe;
+    border-color: #7c3aed;
+}
+
+.stRadio > div [data-checked="true"] > label,
+.stRadio > div > label:has(input:checked) {
+    background: #ede9fe !important;
+    border-color: #7c3aed !important;
+    color: #4f46e5 !important;
+    font-weight: 600 !important;
+}
 .stSelectbox > div > div {
     border-radius: 8px !important;
     border-color: #c4b5fd !important;
@@ -630,16 +670,12 @@ with col1:
     st.markdown("<div class='panel'>", unsafe_allow_html=True)
     st.markdown("<div class='panel-title'>Configuration</div>", unsafe_allow_html=True)
 
-    selected_plant = st.selectbox(
+    selected_plant = st.radio(
         "🌱 Select Plant Type",
         plant_names,
-        key="plant_selector"
+        key="plant_selector",
+        horizontal=False
     )
-
-    # Fix for Android WebView APK — forces re-render after selection
-    if st.session_state.get("_last_plant") != selected_plant:
-        st.session_state["_last_plant"] = selected_plant
-        st.rerun()
 
     uploaded_file = st.file_uploader(
         "📤 Upload Leaf Image",
