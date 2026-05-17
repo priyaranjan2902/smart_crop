@@ -10,11 +10,18 @@ import cv2
 from ultralytics import YOLO
 import os
 
+# ── MUST BE FIRST STREAMLIT COMMAND ──
+st.set_page_config(
+    page_title="🌿 SmartCrop AI Advisor",
+    page_icon="🌱",
+    layout="wide"
+)
+
 # =============================
 # 🔹 CONFIG
 # =============================
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-os.environ['GROQ_API_KEY'] = st.secrets["GROQ_API_KEY"]
+os.environ['GROQ_API_KEY'] = "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"
 
 # =============================
 # 🔹 LOAD CLASSES
@@ -155,15 +162,6 @@ def get_disease_info(plant, disease):
 # =============================
 # 🔹 UI
 # =============================
-# =============================
-# 🔹 PAGE CONFIG
-# =============================
-st.set_page_config(
-    page_title="🌿 SmartCrop AI Advisor",
-    page_icon="🌱",
-    layout="wide"
-)
-
 # =============================
 # 🔹 STYLES
 # =============================
