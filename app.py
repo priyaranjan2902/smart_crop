@@ -31,7 +31,7 @@ plant_names = sorted(list(set([c.split("___")[0] for c in classes])))
 def load_classifier():
     model = models.resnet50()
     model.fc = nn.Linear(model.fc.in_features, len(classes))
-    model.load_state_dict(torch.load("models/model.pth", map_location=DEVICE))
+    model.load_state_dict(torch.load("model.pth", map_location=DEVICE))
     model = model.to(DEVICE)
     model.eval()
     return model
