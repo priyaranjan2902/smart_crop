@@ -183,6 +183,11 @@ footer { display: none !important; }
 html, body, [class*="css"] {
     font-family: 'DM Mono', monospace;
     scroll-behavior: smooth;
+    color: #1e1b4b !important;
+}
+
+p, span, div, label, li {
+    color: #1e1b4b;
 }
 
 /* ── Background ── */
@@ -520,8 +525,8 @@ div[data-testid="stButton"].landing-btn > button:hover {
     background: linear-gradient(90deg, #7c3aed, #fbbf24);
 }
 
-/* ── RADIO BUTTONS ── */
-.stRadio > label {
+/* ── SELECTBOX — force dark text in all WebView/APK contexts ── */
+.stSelectbox > label {
     color: #4f46e5 !important;
     font-family: 'DM Mono', monospace !important;
     font-size: 0.72rem !important;
@@ -530,36 +535,39 @@ div[data-testid="stButton"].landing-btn > button:hover {
     text-transform: uppercase !important;
 }
 
-.stRadio > div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    margin-top: 0.5rem;
-}
-
-.stRadio > div > label {
-    background: #faf9ff;
-    border: 1px solid #ede9fe;
-    border-radius: 8px;
-    padding: 0.55rem 1rem !important;
-    font-family: 'DM Mono', monospace !important;
-    font-size: 0.82rem !important;
+.stSelectbox > div > div {
+    background: #faf9ff !important;
+    border: 1px solid #c4b5fd !important;
+    border-radius: 8px !important;
     color: #1e1b4b !important;
-    cursor: pointer;
-    transition: all 0.15s ease;
 }
 
-.stRadio > div > label:hover {
-    background: #ede9fe;
-    border-color: #7c3aed;
+.stSelectbox > div > div > div {
+    color: #1e1b4b !important;
 }
 
-.stRadio > div [data-checked="true"] > label,
-.stRadio > div > label:has(input:checked) {
+.stSelectbox span,
+.stSelectbox p,
+.stSelectbox div[data-baseweb="select"] span,
+.stSelectbox div[data-baseweb="select"] div {
+    color: #1e1b4b !important;
+    background: #faf9ff !important;
+}
+
+/* dropdown list items */
+div[data-baseweb="popover"] li,
+div[data-baseweb="popover"] ul,
+div[data-baseweb="menu"] li,
+div[data-baseweb="menu"] span {
+    color: #1e1b4b !important;
+    background: #faf9ff !important;
+    font-family: 'DM Mono', monospace !important;
+}
+
+div[data-baseweb="popover"] li:hover,
+div[data-baseweb="menu"] li:hover {
     background: #ede9fe !important;
-    border-color: #7c3aed !important;
     color: #4f46e5 !important;
-    font-weight: 600 !important;
 }
 .stSelectbox > div > div {
     border-radius: 8px !important;
@@ -670,11 +678,10 @@ with col1:
     st.markdown("<div class='panel'>", unsafe_allow_html=True)
     st.markdown("<div class='panel-title'>Configuration</div>", unsafe_allow_html=True)
 
-    selected_plant = st.radio(
+    selected_plant = st.selectbox(
         "🌱 Select Plant Type",
         plant_names,
-        key="plant_selector",
-        horizontal=False
+        key="plant_selector"
     )
 
     uploaded_file = st.file_uploader(
